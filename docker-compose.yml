@@ -1,0 +1,44 @@
+
+version: "3.2"
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "15672:15672"
+    network_mode: "bridge"
+    volumes:
+     - ./storage/rabbitmq1:/var/lib/rabbitmq
+    environment:
+     - RABBITMQ_ERLANG_COOKIE=This_is_my_secret_phrase
+     - RABBITMQ_DEFAULT_USER=guest
+     - RABBITMQ_DEFAULT_PASS=guest
+     - CLUSTERED=true
+  webapp:
+    build:
+      context: .
+      dockerfile: webapp.Dockerfile
+    container_name: frete-facil-webapp
+    ports:
+      - "8000:80"
+    volumes:
+      - ./webapp/:/var/www/html
+    depends_on:
+      - rabbitmq
+    networks:
+      - laravel
+  
+  consumer:
+    build:
+      context: .
+      dockerfile: consumer.Dockerfile
+    container_name: frete-facil-consumer
+    ports:
+      - "5000:5000"
+    depends_on:
+      - rabbitmq
+
+
+networks:
+  laravel:
