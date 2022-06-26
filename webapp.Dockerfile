@@ -40,3 +40,13 @@ RUN docker-php-ext-install \
 
 # Installing composer from docker image.
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Solves laravel permission errors.
+ARG UID
+ARG GID
+ENV UID=${UID}
+ENV GID=${GID}
+RUN addgroup -gid ${GID} --system laravel
+RUN adduser --gid ${GID} --system --disabled-password --shell /bin/sh -u ${UID} laravel
+RUN sed -i "s/export APACHE_RUN_USER/export APACHE_RUN_USER=laravel/g" /etc/apache2/envvars
+RUN sed -i "s/export APACHE_RUN_GROUP/export APACHE_RUN_GROUP=laravel/g" /etc/apache2/envvars

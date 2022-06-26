@@ -19,6 +19,9 @@ services:
     build:
       context: .
       dockerfile: webapp.Dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
     container_name: frete-facil-webapp
     ports:
       - "8000:80"
