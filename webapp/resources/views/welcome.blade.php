@@ -13,7 +13,7 @@
     <p>Upload the desired shipping adjustment CSV through the web application.</p>
     <form method="POST" action="{{route('upload')}}" enctype="multipart/form-data">
         @csrf
-        <input type="file" name="shipping_csv" id="shipping_csv">
+        <input type="file" required name="shipping_csv" id="shipping_csv">
         <input type="submit" value="Upload Image" name="submit">
     </form>
 </body>
