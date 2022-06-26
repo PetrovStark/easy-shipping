@@ -1,5 +1,6 @@
-FROM python:3.8-alpine
-ADD ./consumer /code
+FROM python:3.7-alpine
 WORKDIR /code
-RUN pip3 install -r requirements.txt
-CMD ['python', 'app.py']
+COPY ./consumer/requirements.txt requirements.txt
+RUN pip install -U pip && pip install -r requirements.txt;
+COPY . .
+CMD gunicorn -c gunicorn.conf.py
