@@ -16,6 +16,6 @@ use App\Http\Controllers\SpreadsheetController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::post('/upload', [SpreadsheetController::class, 'upload'])->name('upload');

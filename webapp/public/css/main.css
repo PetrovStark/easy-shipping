@@ -1,0 +1,21 @@
+.screen {
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: 'Roboto Mono', monospace;
+}
+p {
+    font-weight: light;
+}
+.alert {
+    padding: 10px 20px;
+    width: 100%;
+    color: white;
+    border-radius: 5px;
+}
+.alert.alert-error {
+    background-color: #e56565;
+    color: white;
+}
+.alert.alert-success {
+    background-color: green;
+}
