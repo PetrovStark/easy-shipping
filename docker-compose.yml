@@ -14,7 +14,8 @@ services:
     hostname: rabbitmq
     ports:
       - "15672:15672"
-    network_mode: "bridge"
+    networks:
+      - laravel
     volumes:
      - ./storage/rabbitmq1:/var/lib/rabbitmq
     environment:
