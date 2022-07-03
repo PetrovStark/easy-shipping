@@ -1,17 +1,27 @@
-# import Flask object from flask library
-# you can install flask by pip install flask
-from flask import Flask
-# initialize Flask app with the name of the file
-app = Flask(__name__)
+import pika
+import sys
+import os
 
-# define the url for which the application should send an http response to
-@app.route('/')
-# plain python function to handle the request
-def hello_world():
-    # expected return from the function for the request (to the browser)
-    return "Hello World!"
+def main():
+    while True:
+        print('Pringles')
+    # connection = pika.BlockingConnection(pika.ConnectionParameters('messagebroker', 5672))
+    # channel = connection.channel()
+    # channel.queue_declare(queue='csv_paths')
 
-# executed the above defined Flask app
+    # channel.basic_consume(queue='csv_paths', on_message_callback=import_csv, auto_ack=True)
+    # channel.start_consuming()
+
+def import_csv(ch, method, properties, body):
+    """Spreadsheets import script"""
+    print(body)
+
 if __name__ == '__main__':
-    # initialize the app by invoking the Flask function run()
-    app.run()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('Hasta la vista, baby!')
+        try :
+            sys.exit(0)
+        except SystemExit:
+            os._exit(0)

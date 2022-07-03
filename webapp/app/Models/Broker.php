@@ -21,6 +21,7 @@ class Broker extends Model
      */
     public function produceBasicPublish(string $message, string $queue)
     {
+        var_dump($message);
         $connection = new AMQPStreamConnection(
             env('RABBITMQ_HOST'), 
             env('RABBITMQ_PORT'),
