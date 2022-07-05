@@ -39,7 +39,7 @@ class SpreadsheetController extends Controller
         }
 
         $Broker = new Broker();
-        $Broker->produceBasicPublish(asset($upload), 'csv_paths');
+        $Broker->produceBasicPublish($upload, 'csv_paths');
 
         return redirect()
             ->route('welcome', ['show_stage_two' => true])

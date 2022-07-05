@@ -3,6 +3,7 @@ import mysql.connector
 from mysql.connector import errorcode
 
 def get_connection():
+    """Opens a new connection to the database."""
     try:
         cnx = mysql.connector.connect(
             user=os.environ['DB_USER'], 
@@ -24,10 +25,10 @@ def get_connection():
         cnx.close()
 
 def insert(data):
+    """Inserts a new shipping row to the database."""
     insert_spreadsheet = """
-    INSERT INTO spreadsheets (client_id, from_postcode, to_postcode, from_weight, to_weight, cost) VALUES (1, '{}', 'test', 1.76, 2.67, 1.78)
+    INSERT INTO spreadsheets (client_id, from_postcode, to_postcode, from_weight, to_weight, cost) VALUES (1, {})
     """.format(data)
-    print(insert_spreadsheet)
 
     conn = get_connection()
     cursor = conn.cursor()
@@ -35,4 +36,25 @@ def insert(data):
     conn.commit()
     cursor.close()
     conn.close()
+
+def get_sql_values(row, delimiter=';'):
+    """Gets the SQL values from a given spreadsheet row."""
+    row = row.split(delimiter)
+    value = ''
+
+    counter = 1
+    for field in row:
+        if row.index(field) in [2, 3, 4]:
+            field = field.replace('.', '')
+            field = field.replace(',', '.')
+            value += str(float(field))
+        else:
+            value += "\'"+field+"\'"
+        
+        if counter < len(row):
+            value += ', '
+        
+        counter+=1
     
+    return value
+  

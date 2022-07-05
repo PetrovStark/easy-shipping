@@ -36,6 +36,7 @@ services:
     volumes:
       - ./webapp/:/var/www/html
       - ./webapp/ini:/usr/local/etc/php
+      - ./spreadsheets:/var/www/html/storage/app/spreadsheets
     depends_on:
       - messagebroker
       - db
@@ -55,6 +56,8 @@ services:
       - DB_DATABASE=frete_facil_db
     networks:
       - fretefacilnet
+    volumes:
+      - ./spreadsheets:/code/spreadsheets
 
   db:
     image: mysql:5.7

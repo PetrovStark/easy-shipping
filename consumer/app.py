@@ -2,15 +2,22 @@ import pika
 import sys
 import os
 import time
-from repository import insert
+import repository
+from generators import read_csv
 
 time.sleep(10)
 print('RabbitMQ is ready to rock!')
 
 def import_csv(ch, method, properties, body):
-    insert(body.decode('utf-8'))
+    """Imports the spreadsheet to the database when a new message arrives."""
+    csv_gen = read_csv(body.decode('utf-8'))
+
+    next(csv_gen) # Generator should skip the spreadsheet headers.
+    for row in csv_gen:
+        repository.insert(repository.get_sql_values(row))
 
 def main():
+    """Listens to new csv_paths queue messages and handles the spreadsheet import."""
     connection = pika.BlockingConnection(pika.ConnectionParameters('messagebroker', 5672))
     channel = connection.channel()
     channel.queue_declare(queue='csv_paths')
