@@ -15,7 +15,7 @@ class CreateSpreadsheetsTable extends Migration
     {
         Schema::create('spreadsheets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained();
+            $table->integer('client_id');
             $table->string('from_postcode');
             $table->string('to_postcode');
             $table->float('from_weight');

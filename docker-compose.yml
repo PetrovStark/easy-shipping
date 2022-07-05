@@ -4,6 +4,9 @@ version: "3.2"
 volumes:
   db:
 
+networks:
+  fretefacilnet:
+
 services:
   messagebroker:
     image: rabbitmq:3-management
@@ -18,6 +21,8 @@ services:
      - RABBITMQ_DEFAULT_USER=guest
      - RABBITMQ_DEFAULT_PASS=guest
      - CLUSTERED=true
+    networks:
+      - fretefacilnet
 
   webapp:
     build:
@@ -34,17 +39,22 @@ services:
     depends_on:
       - messagebroker
       - db
+    networks:
+      - fretefacilnet
 
   consumer:
     build:
       context: .
       dockerfile: consumer.Dockerfile
-    environment:
-      AMQP_HOST: frete-facil-messagebroker
-      AMQP_QUEUE: 'csv_paths'
     depends_on:
       - messagebroker
       - db
+    environment:
+      - DB_USER=root
+      - DB_PASSWORD=mauFJcuf5dhRMQrjj
+      - DB_DATABASE=frete_facil_db
+    networks:
+      - fretefacilnet
 
   db:
     image: mysql:5.7
@@ -59,3 +69,5 @@ services:
     volumes:
       - db:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - fretefacilnet
