@@ -5,9 +5,6 @@ import time
 import repository
 from generators import read_csv
 
-time.sleep(10)
-print('RabbitMQ is ready to rock!')
-
 def import_csv(ch, method, properties, body):
     """Imports the spreadsheet to the database when a new message arrives."""
     csv_gen = read_csv(body.decode('utf-8'))
