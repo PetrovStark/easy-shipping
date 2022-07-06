@@ -11,6 +11,19 @@
     <title>Easy Shipping</title>
 </head>
 <body>
+    <style>
+        pre, code {
+            font-family: monospace, monospace;
+        }
+        pre {
+            overflow: auto;
+        }
+        pre > code {
+            display: block;
+            padding: 1rem;
+            word-wrap: normal;
+        }
+    </style>
     <div class="screen">
         @if (session('success'))
             <div class="alert alert-success">
@@ -46,11 +59,20 @@
 
         @if(isset($_GET['show_stage_two']) && (bool) $_GET['show_stage_two'] == true)
             <h2>Stage 2:</h2>
-            <p>Go to the <a href="http://localhost:15672" target="__blank">RabbitMQ dashboard</a> to see the current event status.</p>
+            <p>Check the imported data. Access the database to see the imported data. You can find the credentials in the <strong>docker-compose.yml</strong> file, or just copy it from here.</p>
             <ul>
-                <li>Login: guest</li>
-                <li>Password: guest</li>
+                <li>Host:127.0.0.1</li>
+                <li>Port:4406</li>
+                <li>User: root</li>
+                <li>Password: mauFJcuf5dhRMQrjj</li>
+                <li>Database: frete_facil_db</li>
             </ul>
+            <p>Run this query to see the imported data.</p>
+            <figure>
+                <pre>
+                  <code contenteditable spellcheck="false">SELECT * FROM spreadsheets;</code>
+                </pre>
+              </figure>
         @endif
     </div>
 </body>

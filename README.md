@@ -1,5 +1,5 @@
 # Easy Shipping
-A spreadsheet importer capable of handling large amounts of data.
+A spreadsheet importer capable of handling large amounts of data, created to fulfill the requirements of a technical test for a backend developer opportunity.
 
 ## Prerequisites
 - Install [Docker](https://www.docker.com/get-started/) in your local machine.
@@ -28,10 +28,19 @@ Access the **db** database (You can find the credentials in the `docker-compose.
 ```sql
 SELECT * FROM spreadsheets;
 ```
-It should render an empty table with the columns of the database structure.
+It should retrieve an empty table with the columns of the database structure.
 
 ## Upload a new spreadsheet
 Access the **webapp** application in [http://localhost:8000](http://localhost:8000), and upload the `price-table.csv` spreadsheet which you can find in the repo.
 
 ## Check the imported data
-Access again the **db** database running the same query from "First Steps", you should see the imported data from the spreadsheet.
+Access again the **db** database running the same query from "First Steps":
+
+```sql
+SELECT * FROM spreadsheets;
+```
+
+It should retrieve the imported data from the spreadsheet, if you run this query several times, you'll notice that the import is happening in real-time, because I'm using python generator functions, ideal for reading large files.
+
+## This project is unfinished :(
+Unfortunately, this project is not finished yet, I still have to deal with consumer exceptions regarding the spreadsheet format, create a customer entity to allow processing of multiple spreadsheets, I intend to continue working on it even if it doesn't pass the technical challenge.
