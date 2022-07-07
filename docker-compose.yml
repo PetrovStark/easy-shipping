@@ -11,6 +11,7 @@ services:
   messagebroker:
     image: rabbitmq:3-management
     hostname: rabbitmq
+    container_name: messagebroker
     ports:
       - "15672:15672"
       - "5672:5672"
@@ -25,6 +26,7 @@ services:
       - fretefacilnet
 
   webapp:
+    container_name: webapp
     build:
       context: .
       dockerfile: webapp.Dockerfile
@@ -44,6 +46,7 @@ services:
       - fretefacilnet
 
   consumer:
+    container_name: consumer
     build:
       context: .
       dockerfile: consumer.Dockerfile
@@ -61,6 +64,7 @@ services:
 
   db:
     image: mysql:5.7
+    container_name: db
     cap_add:
       - SYS_NICE
     restart: always
