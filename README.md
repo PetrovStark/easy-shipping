@@ -17,9 +17,9 @@ I use a total of 4 services to get the job done:
 
 The **webapp** handles the user interface, where the user will import the shipping adjustment spreadsheet.
 
-The **messagebroker** handles the messaging service, when a new spreadsheet is uploaded in **webapp**, a new message is triggered for this service and stored in a execution queue, which will be intercepted by the **consumer** service in the future.
+The **messagebroker** handles the messaging service, when a new spreadsheet is uploaded in **webapp**, a new message is triggered for this service and stored in a execution queue, which will be fetched by the **consumer** service in the future.
 
-The **consumer** intercept messages from the **messagebroker** queue and handles the process of importing the spreadsheets files into the database.
+The **consumer** fetch new messages from the **messagebroker** queue and handles the process of importing the spreadsheets files into the database.
 
 The **db** contains the database into which the spreadsheet will be uploaded, which is accessible for **webapp** and **consumer**.
 
@@ -27,10 +27,12 @@ The **db** contains the database into which the spreadsheet will be uploaded, wh
 Firstly, clone this repo to your local environment, build the docker container network, and run the laravel migrations inside the **webapp** container:
 
 ```shell
-$ sudo docker-compose up -d
-$ sudo docker exec -it webapp /bin/bash
+$ docker-compose up -d
+$ docker exec -it webapp /bin/bash
 $ php artisan migrate
 ```
+
+*If you're facing permissions issues, try using "sudo" before the first two commands*
 
 Access the database hosted in **db** container (You can find the credentials in the `docker-compose.yml` file), and run this SQL query:
 ```sql
