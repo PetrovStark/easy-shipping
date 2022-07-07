@@ -32,7 +32,7 @@ $ docker exec -it webapp /bin/bash
 $ php artisan migrate
 ```
 
-*If you're facing permissions issues, try using "sudo" before the first two commands*
+*If you're facing permissions issues, try using "sudo" before the first two commands.*
 
 Access the database hosted in **db** container (You can find the credentials in the `docker-compose.yml` file), and run this SQL query:
 ```sql
@@ -53,4 +53,4 @@ SELECT * FROM spreadsheets;
 It should retrieve the uploaded data from the spreadsheet, if you run this query several times, you'll notice that the import is happening in real-time, because I'm using python generator functions, ideal for reading large files.
 
 ## This project is unfinished :(
-Unfortunately, this project is not finished yet, I still have to deal with consumer exceptions regarding the spreadsheet format, create a customer entity to allow processing of multiple spreadsheets, I intend to continue working on it even if it doesn't pass the technical challenge.
+Unfortunately, this project is not finished yet, I still have to deal with consumer exceptions regarding the spreadsheet format, create a customer entity to allow processing of multiple spreadsheets, I intend to continue working on it.
