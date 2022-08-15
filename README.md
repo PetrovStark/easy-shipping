@@ -1,5 +1,5 @@
 # Easy Shipping
-Easy Shipping is a simple application for file (CSV) ingestion to automate the updating of cargo prices data process.
+Easy Shipping is a simple POC (Proof Of Concept) for file (CSV) ingestion to automate the updating of cargo prices data process.
 
 ## Stack
 - Docker Community
