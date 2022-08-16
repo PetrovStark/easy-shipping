@@ -51,6 +51,3 @@ SELECT * FROM spreadsheets;
 ```
 
 It should retrieve the uploaded data from the spreadsheet, if you run this query several times, you'll notice that the import is happening in real-time, because I'm using python generator functions, ideal for reading large files.
-
-## This project is unfinished :(
-Unfortunately, this project is not finished yet, I still have to deal with consumer exceptions regarding the spreadsheet format, create a customer entity to allow processing of multiple spreadsheets, I intend to continue working on it.
