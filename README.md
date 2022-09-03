@@ -27,37 +27,43 @@ The **db** contains the database into which the spreadsheet will be uploaded, wh
 Firstly, clone this repo to your local environment, build the docker container network, copy the .env.example file to a new .env file, and run the laravel migrations inside the **webapp** container:
 
 ```shell
-$ docker-compose up -d
-$ cp ./webapp/.env.example ./webapp/.env
-$ docker exec -it webapp /bin/bash
-$ composer install
-$ php artisan migrate
+docker-compose up -d
+cp ./webapp/.env.example ./webapp/.env
+docker exec -it webapp /bin/bash
+composer install --ignore-platform-reqs
+php artisan migrate
 ```
 
 *If you're facing permissions issues, try using "sudo" before the commands.*
 
 Access the database hosted in **db** container (You can find the credentials in the `docker-compose.yml` file), and list the `spreadsheets` table:
 ```shell
-$ docker exec -it db sh
-$ mysql -uroot -pmauFJcuf5dhRMQrjj
+docker exec -it db sh
+mysql -uroot -pmauFJcuf5dhRMQrjj
 ```
 ```sql
+mysql> USE frete_facil_db;
 mysql> SELECT * FROM spreadsheets;
 ```
 It should retrieve an empty table with the columns of the database structure.
 
 ## Upload a new spreadsheet
-Access the **webapp** application in [http://localhost:8000](http://localhost:8000), and upload the `price-table.csv` spreadsheet which you can find in the repo.
+Access the **webapp** application in [http://localhost:8000](http://localhost:8000) and upload the `price-table.csv` spreadsheet which you can find in the repo.
+
+*You should get this laravel screen when accessing the web application for the first time, just click on the "Generate app key" button, then "Refresh now" and you're good to go.*
+<img src="assets/app_key_missing.png">
+
 
 ## Check the uploaded data
 Access again the database from **db** running the same commands from "First Steps":
 
 ```shell
-$ docker exec -it db sh
-$ mysql -uroot -pmauFJcuf5dhRMQrjj
+docker exec -it db sh
+mysql -uroot -pmauFJcuf5dhRMQrjj
 ```
 ```sql
+mysql> USE frete_facil_db;
 mysql> SELECT * FROM spreadsheets;
 ```
 
-It should retrieve the uploaded data from the spreadsheet, if you run this query several times, you'll notice that the import is happening in real-time, because I'm using python generator functions, ideal for reading large files.
+It should retrieve the uploaded data from the spreadsheet, if you run this query several times, you'll notice that the import is happening in real-time.
