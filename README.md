@@ -32,6 +32,7 @@ cp ./webapp/.env.example ./webapp/.env
 docker exec -it webapp /bin/bash
 composer install --ignore-platform-reqs
 php artisan migrate
+php artisan key:generate
 ```
 
 *If you're facing permissions issues, try using "sudo" before the commands.*
@@ -49,10 +50,6 @@ It should retrieve an empty table with the columns of the database structure.
 
 ## Upload a new spreadsheet
 Access the **webapp** application in [http://localhost:8000](http://localhost:8000) and upload the `price-table.csv` spreadsheet which you can find in the repo.
-
-*You should get this laravel screen when accessing the web application for the first time, just click on the "Generate app key" button, then "Refresh now" and you're good to go.*
-<img src="assets/app_key_missing.png">
-
 
 ## Check the uploaded data
 Access again the database from **db** running the same commands from "First Steps":
