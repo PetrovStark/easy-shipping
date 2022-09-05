@@ -35,7 +35,7 @@ php artisan migrate
 php artisan key:generate
 ```
 
-*If you're facing permissions issues, try using "sudo" before the commands.*
+*If you're facing permissions issues, follow [this tutorial](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) to grant permissions to your user and you're good to go.*
 
 Access the database hosted in **db** container (You can find the credentials in the `docker-compose.yml` file), and list the `spreadsheets` table:
 ```shell
