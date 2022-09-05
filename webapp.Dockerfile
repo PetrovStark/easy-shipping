@@ -51,7 +51,3 @@ RUN adduser --gid ${GID} --system --disabled-password --shell /bin/sh -u ${UID} 
 RUN sed -i "s/export APACHE_RUN_USER/export APACHE_RUN_USER=laravel/g" /etc/apache2/envvars
 RUN sed -i "s/export APACHE_RUN_GROUP/export APACHE_RUN_GROUP=laravel/g" /etc/apache2/envvars
 RUN chown laravel:laravel -R /var/www/html
-RUN mkdir /var/www/html/storage
-RUN mkdir /var/www/html/storage/app
-RUN mkdir /var/www/html/storage/app/spreadsheets
-RUN chown laravel:laravel -R /var/www/html/storage/app/spreadsheets
