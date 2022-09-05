@@ -24,7 +24,7 @@ The **consumer** fetch new messages from the **messagebroker** queue and handles
 The **db** contains the database into which the spreadsheet will be uploaded, which is accessible for **webapp** and **consumer**.
 
 ## First steps
-Firstly, clone this repo to your local environment, build the docker container network, copy the .env.example file to a new .env file, and run the laravel migrations inside the **webapp** container:
+After cloning this repo, run this commands below to build the docker containers, run the database migrations and grant the required permissions for the Laravel project.
 
 ```shell
 docker-compose up -d
@@ -33,9 +33,10 @@ docker exec -it webapp /bin/bash
 composer install --ignore-platform-reqs
 php artisan migrate
 php artisan key:generate
+chown laravel:laravel -R *
 ```
 
-*If you're facing permissions issues, follow [this tutorial](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) to grant permissions to your user and you're good to go.*
+*If you're facing permissions issues during this step, follow [this tutorial](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) to grant permissions to your user and you're good to go.*
 
 Access the database hosted in **db** container (You can find the credentials in the `docker-compose.yml` file), and list the `spreadsheets` table:
 ```shell
