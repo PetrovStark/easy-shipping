@@ -1,5 +1,5 @@
 # Easy Shipping
-Easy Shipping is a simple POC (Proof Of Concept) for file (CSV) ingestion to automate the updating of cargo prices data process.
+Easy Shipping is a proof of concept (POC) to test large CSV ingestion.
 
 ## Stack
 - Docker Community
